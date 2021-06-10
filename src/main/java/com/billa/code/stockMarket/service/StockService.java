@@ -4,16 +4,10 @@ import com.billa.code.stockMarket.model.StockModel;
 import com.billa.code.stockMarket.model.StockResponseModel;
 import com.billa.code.stockMarket.wrapper.StockWrapper;
 import org.springframework.stereotype.Service;
-
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
-
-import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 public class StockService {
