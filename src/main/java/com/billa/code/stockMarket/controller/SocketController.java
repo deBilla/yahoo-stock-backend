@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
+import static com.billa.code.stockMarket.StockMarketApplication.stocks;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 @Controller
@@ -22,7 +23,7 @@ public class SocketController {
     @MessageMapping("/hello")
     public void greeting() {
         scheduler.scheduleAtFixedRate(() -> {
-            template.convertAndSend("/topic/message", stockService.getStockResponse());
+            template.convertAndSend("/topic/message", stocks);
         }, 0, 2, SECONDS);
     }
 }
