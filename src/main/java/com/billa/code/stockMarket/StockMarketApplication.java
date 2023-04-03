@@ -21,7 +21,6 @@ import java.util.TimerTask;
 @SpringBootApplication
 public class StockMarketApplication implements CommandLineRunner {
     private final DispatchServer dispatchServer;
-    public static final List<StockResponseModel> stocks = new ArrayList<>();
 
     @Autowired
     StockService stockService;
@@ -50,17 +49,5 @@ public class StockMarketApplication implements CommandLineRunner {
                 }
             }
         }, 0, 1000 * 30); // Schedule the task to run every 1 second
-    }
-    @KafkaListener(topics = "stock-market-data", groupId = "group-id")
-    public void listen(String message) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            StockResponseModel stockResponseModel = objectMapper.readValue(message, StockResponseModel.class);
-            stocks.clear();
-            stocks.add(stockResponseModel);
-            System.out.println("Received Messasge in group - group-id: " + stockResponseModel);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
